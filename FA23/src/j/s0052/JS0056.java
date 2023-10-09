@@ -115,7 +115,7 @@ class WorkerHash {
                 case "DOWN" -> worker.setSalary(worker.getSalary()-salary);
             }
             LocalDate date = LocalDate.now();
-            salaryStatus.add(new Salary(code,worker.getName(),worker.getAge(),worker.getSalary() > 0 ? worker.getSalary() : 0,type,date));
+            salaryStatus.add(new Salary(code,worker.getName(),worker.getAge(), Math.max(worker.getSalary(), 0),type,date));
         } else System.out.println("Worker not founded!!");
     }
     public void display() {
