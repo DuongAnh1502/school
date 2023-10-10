@@ -7,7 +7,7 @@ public class JS0058 {
     static String isValid(String text) {
         System.out.print(text);
         String input = sc.nextLine();
-        return input.matches("^[a-zA-Z\s]+$") ? input : isValid("At leats 1 character!\nEnter again : ");
+        return input.matches("^[a-zA-Z\s]+$") ? input : isValid("At least 1 character!\nEnter again : ");
     }
     static void addWord() {
         String eng = isValid("Enter English : ");
