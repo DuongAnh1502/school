@@ -1,6 +1,0 @@
-Anh,Ha Noi,400.0
-Sang,Sai Gon,300.0
-Nhat,Da Nang,100.0
-Nghia,Ha Noi,1000.0
-Thanh,Ha Noi,1200.0
-Phuong,Ha Noi,1300.0
