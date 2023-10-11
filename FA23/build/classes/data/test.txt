@@ -1,0 +1,6 @@
+Anh,Ha Noi,400
+Sang,Sai Gon,300
+Nhat,Da Nang,100
+Nghia,Ha Noi,1000
+Thanh,Ha Noi,1200
+Phuong,Ha Noi,1300
