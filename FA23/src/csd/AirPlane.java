@@ -2,7 +2,7 @@ package csd;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-public class AriPlane {
+public class AirPlane {
     static HashMap<String,ArrayList<Edge>> map = new HashMap<>();
     static Scanner sc = new Scanner(System.in);
     static void run() {
