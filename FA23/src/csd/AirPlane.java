@@ -33,7 +33,7 @@ public class AirPlane {
                 int value = e.getValue();
                 if(d.get(name) > d.get(v) + value) {
                     d.put(name,d.get(v)+value);
-                    PQ.add(new Vertex(name,d.get(v)));
+                    PQ.add(new Vertex(name,d.get(name)));
                 }
             }
         }
