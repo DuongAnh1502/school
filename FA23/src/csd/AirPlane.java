@@ -29,11 +29,11 @@ public class AirPlane {
             PQ.remove();
             if (distance > d.get(v)) continue;
             for(Vertex e : map.get(v)) {
-                String vertex = e.getV();
+                String name = e.getV();
                 int value = e.getValue();
-                if(d.get(vertex) > d.get(v) + value) {
-                    d.put(vertex,d.get(v)+value);
-                    PQ.add(new Vertex(vertex,d.get(v)));
+                if(d.get(name) > d.get(v) + value) {
+                    d.put(name,d.get(v)+value);
+                    PQ.add(new Vertex(name,d.get(v)));
                 }
             }
         }
