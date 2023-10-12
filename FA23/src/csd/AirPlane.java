@@ -1,7 +1,5 @@
 package csd;
-import java.lang.reflect.Array;
 import java.util.*;
-
 public class AirPlane {
     static HashMap<String,ArrayList<Edge>> map = new HashMap<>();
     static Scanner sc = new Scanner(System.in);
@@ -13,7 +11,6 @@ public class AirPlane {
         PQ.add(new Edge(s,0));
         while (!PQ.isEmpty()) {
             int distance = PQ.peek().getValue();
-            assert PQ.peek() != null;
             String v = PQ.peek().getV();
             PQ.remove();
             if (distance > d.get(v)) continue;
