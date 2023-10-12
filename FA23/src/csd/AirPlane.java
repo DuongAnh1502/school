@@ -3,16 +3,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 public class AirPlane {
-    static HashMap<String,ArrayList<Edge>> map = new HashMap<>();
+    static HashMap<Vertex,ArrayList<Edge>> map = new HashMap<>();
     static Scanner sc = new Scanner(System.in);
+    static HashMap<Vertex,Float> dijkstra() {
+        HashMap<Vertex,Float> rs = new HashMap<>();
+
+        return rs;
+    }
     static void run() {
         String[] inp = sc.nextLine().split(" ");
         int n = Integer.parseInt(inp[0]);
         int m = Integer.parseInt(inp[1]);
         for (int i = 0;i<m;i++) {
             inp = sc.nextLine().split(" ");
-            String v1 = inp[0];
-            String v2 = inp[1];
+            Vertex v1 = new Vertex(inp[0]);
+            Vertex v2 = new Vertex(inp[1]);
             float value = Float.parseFloat(inp[2]);
             if(map.get(v1) != null) {
                 map.get(v1).add(new Edge(v2,value));
@@ -33,17 +38,17 @@ public class AirPlane {
     }
 }
 class Edge {
-    private String v2;
+    private Vertex v2;
     private float value;
-    public Edge(String v2, float value) {
+    public Edge(Vertex v2, float value) {
         this.v2 = v2;
         this.value = value;
     }
-    public String getV2() {
+    public Vertex getV2() {
         return v2;
     }
 
-    public void setV2(String v2) {
+    public void setV2(Vertex v2) {
         this.v2 = v2;
     }
 
