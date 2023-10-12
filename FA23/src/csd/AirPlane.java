@@ -1,14 +1,34 @@
 package csd;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-public class AirPlane {
-    static HashMap<Vertex,ArrayList<Edge>> map = new HashMap<>();
-    static Scanner sc = new Scanner(System.in);
-    static HashMap<Vertex,Float> dijkstra() {
-        HashMap<Vertex,Float> rs = new HashMap<>();
+import java.lang.reflect.Array;
+import java.util.*;
 
-        return rs;
+public class AirPlane {
+    static HashMap<String,ArrayList<Edge>> map = new HashMap<>();
+    static Scanner sc = new Scanner(System.in);
+    static void dijkstra(String s) {
+        PriorityQueue<Edge> PQ = new PriorityQueue<>(Comparator.comparingInt(Edge::getValue));
+        HashMap<String,Integer> d = new HashMap<>();
+        map.forEach((key,value) -> d.put(key,Integer.MAX_VALUE));
+        d.put(s,0);
+        PQ.add(new Edge(s,0));
+        while (!PQ.isEmpty()) {
+            int distance = PQ.peek().getValue();
+            assert PQ.peek() != null;
+            String v = PQ.peek().getV();
+            PQ.remove();
+            if (distance > d.get(v)) continue;
+            for(Edge edge : map.get(v)) {
+                String vertex = edge.getV();
+                int value = edge.getValue();
+                if(d.get(vertex) > d.get(v) + value) {
+                    d.put(vertex,d.get(v)+value);
+                    PQ.add(new Edge(vertex,d.get(v)));
+                }
+            }
+        }
+        d.forEach((key,value) -> {
+            if(!key.equalsIgnoreCase(s)) System.out.println(s+ " to "+key+" : "+value);
+        });
     }
     static void run() {
         String[] inp = sc.nextLine().split(" ");
@@ -16,9 +36,9 @@ public class AirPlane {
         int m = Integer.parseInt(inp[1]);
         for (int i = 0;i<m;i++) {
             inp = sc.nextLine().split(" ");
-            Vertex v1 = new Vertex(inp[0]);
-            Vertex v2 = new Vertex(inp[1]);
-            float value = Float.parseFloat(inp[2]);
+            String v1 = inp[0];
+            String v2 = inp[1];
+            int value = Integer.parseInt(inp[2]);
             if(map.get(v1) != null) {
                 map.get(v1).add(new Edge(v2,value));
             } else {
@@ -32,97 +52,52 @@ public class AirPlane {
                 map.get(v2).add(new Edge(v1,value));
             }
         }
+        dijkstra("danang");
     }
     public static void main(String[] args) {
         run();
     }
 }
 class Edge {
-    private Vertex v2;
-    private float value;
-    public Edge(Vertex v2, float value) {
-        this.v2 = v2;
+    private String v;
+    private int value;
+    public Edge(String v, int value) {
+        this.v = v;
         this.value = value;
     }
-    public Vertex getV2() {
-        return v2;
+    public String getV() {
+        return v;
     }
 
-    public void setV2(Vertex v2) {
-        this.v2 = v2;
+    public void setV(String v) {
+        this.v = v;
     }
 
-    public float getValue() {
+    public int getValue() {
         return value;
     }
 
-    public void setValue(float value) {
+    public void setValue(int value) {
         this.value = value;
     }
 }
 class Vertex {
-    private final String name;
+    private String name;
     private String region;
+    private final String[] north = {"Mien Bac","hanoi", "tuyenquang", "laocai", "yenbai", "sonla", "hoabinh", "dienbien", "langson", "quangninh", "bacgiang", "phuthuoc", "vinhphuc", "bacninh", "haiduong", "thaibinh", "namdinh", "hanam", "thainguyen", "hungyen", "vinhphuc"};
+    private final String[] cen = {"Mien Trung","thanhhoa", "nghean", "hatinh", "quangbinh", "quangtri", "thuathienhue", "danang", "quangnam", "quangnai", "binhdinh", "phuyen", "khanhhoa", "ninhthuan", "binhthuan", "kontum", "gialai", "daklak", "daknong"};
+    private final String[] south = {"Mien Nam","cantho", "dongnai", "binhduong", "tphochiminh", "binhphuoc", "tayninh", "angiang", "kiengiang", "camau", "baclieu", "soctrang", "travinh", "vinhlong", "bentre", "longan", "tiengiang", "dongthap"};
+    private String[][] regions = {north,cen,south};
     public Vertex(String name) {
         this.name = name;
-        switch(name) {
-            case "ha noi",
-                    "tuyen quang",
-                    "lao cai",
-                    "yen bai",
-                    "son la",
-                    "hoa binh",
-                    "dien bien",
-                    "lang son",
-                    "quang ninh",
-                    "bac giang",
-                    "phu tho",
-                    "vinh phuc",
-                    "bac ninh",
-                    "hai duong",
-                    "thai binh",
-                    "nam dinh",
-                    "ha nam",
-                    "thai nguyen",
-                    "hung yen" -> {this.region = "Mien Bac";}
-            case "thanh hoa",
-                    "nghe an",
-                    "ha tinh",
-                    "quang binh",
-                    "quang tri",
-                    "thua thien hue",
-                    "da nang",
-                    "quang nam",
-                    "quang ngai",
-                    "binh dinh",
-                    "phu yen",
-                    "khanh hoa",
-                    "ninh thuan",
-                    "binh thuan",
-                    "kon tum",
-                    "gia lai",
-                    "dak lak",
-                    "dak nong" -> {this.region = "Mien Trung";}
-            case "can tho",
-                    "dong nai",
-                    "binh duong",
-                    "tp ho chi minh",
-                    "binh phuoc",
-                    "tay ninh",
-                    "an giang",
-                    "kien giang",
-                    "ca mau",
-                    "bac lieu",
-                    "soc trang",
-                    "tra vinh",
-                    "vinh long",
-                    "ben tre",
-                    "long an",
-                    "tien giang",
-                    "dong thap" -> {this.region = "Mien Nam";}
+        for (String[] reg : regions) {
+            for (int i = 1;i<reg.length;i++) {
+                if(reg[i].equalsIgnoreCase(name)) {
+                    this.region = reg[0];
+                }
+            }
         }
     }
-
     public String getName() {
         return name;
     }
