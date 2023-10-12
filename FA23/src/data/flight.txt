@@ -1,0 +1,9 @@
+danang saigon 100
+danang hanoi 200
+hanoi saigon 300
+saigon nghean 100
+hanoi nghean 200
+danang laocai 400
+hanoi laocai 200
+saigon laocai 100
+laocai hatinh 400

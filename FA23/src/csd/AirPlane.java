@@ -1,4 +1,5 @@
 package csd;
+import java.io.*;
 import java.util.*;
 public class AirPlane {
     static HashMap<String,ArrayList<Vertex>> map = new HashMap<>();
@@ -38,30 +39,33 @@ public class AirPlane {
             }
         }
         d.forEach((key,value) -> {
-            if(!key.equalsIgnoreCase(s) && getRegion(key).equalsIgnoreCase(r)) System.out.println(s+ " to "+key+" : "+value);
+            if(!key.equalsIgnoreCase(s)) System.out.println(s+ " to "+key+" : "+value);
         });
     }
     static void run() {
-        String[] inp = sc.nextLine().split(" ");
-        int n = Integer.parseInt(inp[0]);
-        int m = Integer.parseInt(inp[1]);
-        for (int i = 0;i<m;i++) {
-            inp = sc.nextLine().split(" ");
-            String v1 = inp[0];
-            String v2 = inp[1];
-            int value = Integer.parseInt(inp[2]);
-            if(map.get(v1) != null) {
-                map.get(v1).add(new Vertex(v2,value));
-            } else {
-                map.put(v1,new ArrayList<>());
-                map.get(v1).add(new Vertex(v2,value));
+        File currentDir = new File("");
+        try(BufferedReader br = new BufferedReader(new FileReader(currentDir.getAbsolutePath()+"/FA23/src/data/flight.txt"))) {
+            String line;
+            while((line = br.readLine())!=null) {
+                String[] inp = line.split(" ");
+                String v1 = inp[0];
+                String v2 = inp[1];
+                int value = Integer.parseInt(inp[2]);
+                if(map.get(v1) != null) {
+                    map.get(v1).add(new Vertex(v2,value));
+                } else {
+                    map.put(v1,new ArrayList<>());
+                    map.get(v1).add(new Vertex(v2,value));
+                }
+                if(map.get(v2) != null) {
+                    map.get(v2).add(new Vertex(v1,value));
+                } else {
+                    map.put(v2,new ArrayList<>());
+                    map.get(v2).add(new Vertex(v1,value));
+                }
             }
-            if(map.get(v2) != null) {
-                map.get(v2).add(new Vertex(v1,value));
-            } else {
-                map.put(v2,new ArrayList<>());
-                map.get(v2).add(new Vertex(v1,value));
-            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         dijkstra("danang","Mien Nam");
     }
