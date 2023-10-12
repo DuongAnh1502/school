@@ -35,7 +35,6 @@ public class AirPlane {
 class Edge {
     private String v2;
     private float value;
-
     public Edge(String v2, float value) {
         this.v2 = v2;
         this.value = value;
@@ -55,5 +54,77 @@ class Edge {
     public void setValue(float value) {
         this.value = value;
     }
-    
+}
+class Vertex {
+    private final String name;
+    private String region;
+    public Vertex(String name) {
+        this.name = name;
+        switch(name) {
+            case "ha noi",
+                    "tuyen quang",
+                    "lao cai",
+                    "yen bai",
+                    "son la",
+                    "hoa binh",
+                    "dien bien",
+                    "lang son",
+                    "quang ninh",
+                    "bac giang",
+                    "phu tho",
+                    "vinh phuc",
+                    "bac ninh",
+                    "hai duong",
+                    "thai binh",
+                    "nam dinh",
+                    "ha nam",
+                    "thai nguyen",
+                    "hung yen" -> {this.region = "Mien Bac";}
+            case "thanh hoa",
+                    "nghe an",
+                    "ha tinh",
+                    "quang binh",
+                    "quang tri",
+                    "thua thien hue",
+                    "da nang",
+                    "quang nam",
+                    "quang ngai",
+                    "binh dinh",
+                    "phu yen",
+                    "khanh hoa",
+                    "ninh thuan",
+                    "binh thuan",
+                    "kon tum",
+                    "gia lai",
+                    "dak lak",
+                    "dak nong" -> {this.region = "Mien Trung";}
+            case "can tho",
+                    "dong nai",
+                    "binh duong",
+                    "tp ho chi minh",
+                    "binh phuoc",
+                    "tay ninh",
+                    "an giang",
+                    "kien giang",
+                    "ca mau",
+                    "bac lieu",
+                    "soc trang",
+                    "tra vinh",
+                    "vinh long",
+                    "ben tre",
+                    "long an",
+                    "tien giang",
+                    "dong thap" -> {this.region = "Mien Nam";}
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+    public String getRegion() {
+        return region;
+    }
+    public void setRegion(String region) {
+        this.region = region;
+    }
 }
