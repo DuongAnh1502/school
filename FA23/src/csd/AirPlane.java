@@ -39,12 +39,13 @@ public class AirPlane {
             visited.replaceAll((key,value)->false);
             visited.put(v, true);
             ls.clear();
+            if(v.equalsIgnoreCase("danang")) continue;
             dfs("danang");
             if(ls.size() != map.size()-1) {
                 rs.add(v);
             }
         }
-        System.out.println("Cutting point : ");
+        System.out.print("Cutting point : ");
         for(String v:rs) {
             System.out.print(v+ " ");
         }
