@@ -39,8 +39,9 @@ public class AirPlane {
             visited.replaceAll((key,value)->false);
             visited.put(v, true);
             ls.clear();
-            if(v.equalsIgnoreCase("danang")) continue;
-            dfs("danang");
+            if(v.equalsIgnoreCase("danang")) {
+                dfs("hochiminh");
+            } else dfs("danang");
             if(ls.size() != map.size()-1) {
                 rs.add(v);
             }
@@ -87,13 +88,13 @@ public class AirPlane {
         rs.add(s);
         Collections.reverse(rs);
         for(String n:rs) {
-            System.out.print(n+" ");
+            System.out.print(n + " ");
         }
         System.out.println("");
     }
     static void run() {
         File currentDir = new File("");
-        try(BufferedReader br = new BufferedReader(new FileReader(currentDir.getAbsolutePath()+"/src/data/flight.txt"))) {
+        try(BufferedReader br = new BufferedReader(new FileReader(currentDir.getAbsolutePath()+"/FA23/src/data/flight.txt"))) {
             String line;
             while((line = br.readLine())!=null) {
                 String[] inp = line.split(" ");
