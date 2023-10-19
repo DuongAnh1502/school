@@ -9,7 +9,7 @@ class Asm2 {
     public static void readFile() {
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("data/books.csv.txt"));
+            br = new BufferedReader(new FileReader("FA23/src/data/books.csv.txt"));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split("\";\"");
@@ -46,8 +46,8 @@ class Asm2 {
     static void merge(ArrayList<Book> arr,int l,int m,int r) {
         int n1 = m - l + 1;
         int n2 = r - m;
-        ArrayList<Book> L = new ArrayList<>();
-        ArrayList<Book> R = new ArrayList<>();
+        ArrayList<Book> L = new ArrayList<>(n1);
+        ArrayList<Book> R = new ArrayList<>(n2);
         for (int i = 0; i < n1; ++i)
             L.add(arr.get(l + i));
         for (int j = 0; j < n2; ++j)
@@ -84,10 +84,13 @@ class Asm2 {
         }
     }
     public static void display() {
-        System.out.println("\t Top 5 books :");
+        System.out.println("Top 5 highest books by ISBN:");
         for (int i = listBook.size()-1; i >= listBook.size()-5; i--) {
             System.out.println(listBook.get(i).toString());
-            System.out.println(convertToASCII(listBook.get(i).getIsbn()));
+        }
+        System.out.println("Top 5 lowest books by ISBN:");
+        for (int i = 0; i < 5; i++) {
+            System.out.println(listBook.get(i).toString());
         }
     }
     public static void main(String[] args) {
