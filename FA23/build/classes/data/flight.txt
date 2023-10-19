@@ -2,6 +2,7 @@ danang dalat 450
 danang quangnam 400
 danang hochiminh 800
 danang cantho 900
+danang gialai 1000
 dalat hochiminh 450
 quangnam hochiminh 500
 hochiminh condao 300
