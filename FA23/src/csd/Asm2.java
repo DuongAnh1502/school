@@ -2,14 +2,13 @@ package csd;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.sql.Array;
 import java.util.ArrayList;
 class Asm2 {
     static ArrayList<Book> listBook = new ArrayList<>();
     public static void readFile() {
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("FA23/src/data/books.csv.txt"));
+            br = new BufferedReader(new FileReader("./src/data/books.csv.txt"));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split("\";\"");
@@ -83,6 +82,32 @@ class Asm2 {
             merge(arr, l, m, r);
         }
     }
+    static int partition(ArrayList<Book> list,int l,int r) {
+        int i = l-1;
+        int j = r+1;
+        double pivot = convertToASCII(listBook.get(l).getIsbn());
+        while (true) {
+            do {
+                i++;
+            } while(convertToASCII(listBook.get(i).getIsbn()) < pivot);
+            do {
+                j--;
+            } while(convertToASCII(listBook.get(j).getIsbn()) > pivot);
+            if(i>=j) {
+                return j;
+            }
+            Book temp = listBook.get(i);
+            listBook.set(i, listBook.get(j));
+            listBook.set(j, temp);
+        }
+    }
+    static void quickSort(ArrayList<Book> list,int l,int r) {
+        if(l<r) {
+            int index = partition(list,l,r);
+            quickSort(list,l, index);
+            quickSort(list,index+1, r);
+        }
+    }
     public static void display() {
         System.out.println("Top 5 highest books by ISBN:");
         for (int i = listBook.size()-1; i >= listBook.size()-5; i--) {
@@ -95,9 +120,10 @@ class Asm2 {
     }
     public static void main(String[] args) {
         readFile();
-        sort(listBook,0,listBook.size()-1);
+        quickSort(listBook,0,listBook.size()-1);
         display();
     }
+    
 }
 class Book {
     private String isbn, bookTitle, bookAuthor, publisher, imageS, imageM, imageL;
@@ -182,5 +208,4 @@ class Book {
     public String toString() {
         return "Book{" +"yearOfPublishcation=" + yearOfPublishcation+" , " + "isbn=" + isbn + ", bookTitle=" + bookTitle + ", bookAuthor=" + bookAuthor + ", publisher=" + publisher + ", imageS=" + imageS + ", imageM=" + imageM + ", imageL=" + imageL  + "}";
     }
-
 }
