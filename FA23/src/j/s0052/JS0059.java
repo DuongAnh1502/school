@@ -15,7 +15,7 @@ public class JS0059 {
         switch(type) {
             case "PATH" -> {
                 File file = new File(input);
-                if(!file.exists()) isValid("File does not exits\nEnter again : ", type);
+                if(!file.exists()) return isValid("File does not exits\nEnter again : ", type);
                 return input;
             }
             case "MONEY" -> {return input.matches("^\\d+$") ? input : isValid("Enter money again : ", type);}
@@ -63,9 +63,9 @@ public class JS0059 {
         }
         return list;
     }
-    public static void writeFile(String path) {
+    public static void writeFile(String fileName) {
         try {
-            FileWriter fw = new FileWriter(path);
+            FileWriter fw = new FileWriter("./src/data"+fileName);
             String line = "";
             for (Person person : list) {
                 line += person.getName()+ "," + person.getAddress()+","+person.getMoney()+"\n";
