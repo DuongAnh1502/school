@@ -10,9 +10,8 @@ public class JS0063 {
         switch(type) {
             case "NAME" -> {return input.matches("[A-Za-z]+") ? input : validate("Enter only character\nPlease enter name : ", type);}
             case "NUM" -> {
-                if(input.matches("^-?\\d+(\\.\\d+)?$")) {
+                if(input.matches("^-?\\d+(\\.\\d+)?$"))
                     return Integer.parseInt(input) > 0 ? input : validate("Salary is greater than zero\nPlease enter salary : ", type);
-                }
                 else return validate("Please enter only number\nPlease enter salary : ", type);
             }
             default -> {return input;}
