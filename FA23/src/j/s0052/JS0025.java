@@ -10,9 +10,6 @@ public class JS0025 {
             StringBuilder text = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.trim().isEmpty()) {
-                    continue;
-                }
                 text.append(line).append("\n");
             }
             String normalizedText = text.toString().trim();
