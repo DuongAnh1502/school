@@ -134,5 +134,4 @@ class Student {
         System.out.println("AVG : "+getAvg());
         System.out.println("Type : "+getType());
     }
-    
 }
