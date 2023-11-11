@@ -1,13 +1,9 @@
 package j.s0052;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Scanner;
+import java.util.*;
 public class JS0021 {
     static Scanner sc = new Scanner(System.in);
     static ArrayList<Student> studentList = new ArrayList<>();
+    static HashSet<CourseManage> course = new HashSet<>();
     static String validate(String text,String type) {
         System.out.print(text);
         String input = sc.nextLine();
@@ -52,21 +48,18 @@ public class JS0021 {
         }
     }
     static void report() {
-        HashMap<Student,Integer> studentMap = new HashMap<>();
-        for(Student s : studentList) studentMap.put(s, 0);
-        for(int i = 0;i<studentList.size();i++) {
-            int count = 0;
-            for(int j = i;j<studentList.size();j++) {
-                Student st1 = studentList.get(i);
-                Student st2 = studentList.get(j);
-                if (st1.getStudentName().equalsIgnoreCase(st2.getStudentName()) && st1.getCourseName().equalsIgnoreCase(st2.getCourseName()))
-                    count++;
-            }
-            studentMap.put(studentList.get(i), count);
+        for(Student s : studentList) {
+            course.add(new CourseManage(0,s.getStudentName(),s.getCourseName()));
         }
-        Collection<Student> key = studentMap.keySet();
-        for(Student s : key) {
-            System.out.println(s.getStudentName() + "|" + s.getCourseName() + "|" + studentMap.get(s));
+        for(CourseManage c : course) {
+            for(Student st : studentList) {
+                if(st.getStudentName().equalsIgnoreCase(c.getStudentName()) && st.getCourseName().equalsIgnoreCase(c.getCourseName())) {
+                    c.setNum(c.getNum()+1);
+                }
+            }
+        }
+        for(CourseManage c : course) {
+            System.out.println(c.getStudentName()+ " | " + c.getCourseName() + " | "+c.getNum());
         }
     }
     static void updateDelete() {
@@ -99,6 +92,28 @@ public class JS0021 {
                 case 4 -> report();
             }
         } while(n!=5);
+    }
+}
+class CourseManage {
+    private int num;
+    private String studentName;
+    private String courseName;
+    public CourseManage(int num, String studentName, String courseName) {
+        this.num = num;
+        this.studentName = studentName;
+        this.courseName = courseName;
+    }
+    public int getNum() {
+        return num;
+    }
+    public void setNum(int num) {
+        this.num = num;
+    }
+    public String getStudentName() {
+        return studentName;
+    }
+    public String getCourseName() {
+        return courseName;
     }
 }
 class Student implements Comparable<Student>{
